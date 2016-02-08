@@ -14,10 +14,16 @@ end
 
 class ComputerPlayer < Player
   def initialize(name = "HAL 9000")
-    if name
+    @name = name
+    unless name == "HAL 9000"
       raise ArgumentError
     end
   end
+
+  def name
+    @name
+  end
+
 end
 
 class ArgumentError < StandardError
