@@ -31,6 +31,11 @@ class ArgumentError < StandardError
 end
 
 class Ship
-  def initialize
+  def initialize(length)
+    @length = length
+  end
+
+  def length
+    @length
   end
 end
