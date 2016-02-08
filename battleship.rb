@@ -33,9 +33,26 @@ end
 class Ship
   def initialize(length)
     @length = length
+    @positions = []
   end
 
   def length
     @length
+  end
+
+  def place(x, y, across)
+    if across
+      (x...x+@length).each do |i|
+      @positions << [i, y]
+      end
+    else
+      (y...y+@length).each do |i|
+      @positions << [x, i]
+      end
+    end
+  end
+
+  def covers?(x, y)
+    @positions.include?([x, y])
   end
 end
