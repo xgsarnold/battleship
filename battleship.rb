@@ -29,3 +29,8 @@ end
 class ArgumentError < StandardError
   # ComputerPlayer.new("The Red Queen")
 end
+
+class Ship
+  def initialize
+  end
+end
