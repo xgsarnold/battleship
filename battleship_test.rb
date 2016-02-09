@@ -1,6 +1,6 @@
-require 'byebug'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'byebug'
 
 #Note: This line is going to fail first.
 require './battleship.rb'
@@ -177,11 +177,10 @@ J |   |   |   |   |   |   |   |   |   |   |
 }
   end
 
-byebug
-
   def test_18_place_ship
     grid = Grid.new
     assert grid.place_ship(Ship.new(4), 3, 3, true)
+    assert grid.place_ship(Ship.new(3), 1, 1, true)
     refute grid.has_ship_on?(2, 3)
     assert grid.has_ship_on?(3, 3)
     assert grid.has_ship_on?(4, 3)
@@ -190,18 +189,19 @@ byebug
     refute grid.has_ship_on?(5, 4)
   end
 
+
   # Don't forget on this next one that giving the ship coordinates and placing
   # it on the grid are two separate steps.  You can do the first before knowing
   # whether it's possible to do the second.
-#   def test_19_cant_place_overlapping_ships
-#     grid = Grid.new
-#     assert grid.place_ship(Ship.new(4), 3, 3, true)
-#     refute grid.place_ship(Ship.new(4), 1, 3, true)
-#     refute grid.place_ship(Ship.new(4), 4, 3, true)
-#     refute grid.place_ship(Ship.new(4), 4, 2, false)
-#     assert grid.place_ship(Ship.new(4), 7, 7, true)
-#   end
-#
+  def test_19_cant_place_overlapping_ships
+    grid = Grid.new
+    assert grid.place_ship(Ship.new(4), 3, 3, true)
+    refute grid.place_ship(Ship.new(4), 1, 3, true)
+    refute grid.place_ship(Ship.new(4), 4, 3, true)
+    refute grid.place_ship(Ship.new(4), 4, 2, false)
+    assert grid.place_ship(Ship.new(4), 7, 7, true)
+  end
+
 #   def test_20_ready_grid_can_display_itself
 #     grid = Grid.new
 #     assert grid.place_ship(Ship.new(2), 3, 6, true)
@@ -557,13 +557,13 @@ byebug
 #       game.take_turn
 #     end
 #   end
-#
-#   # Just checking to see if the display works after some shots have been fired.
-#   # Note that Amy can see on the top grid where she has hit Beth's ships and
-#   # missed Beth's ships.
-#   #
-#   # This one is surprisingly hard.  Up until now, you won't kept any track of
-#   # shots taken that were misses.  Now you have to do that.
+
+  # Just checking to see if the display works after some shots have been fired.
+  # Note that Amy can see on the top grid where she has hit Beth's ships and
+  # missed Beth's ships.
+  #
+  # This one is surprisingly hard.  Up until now, you won't kept any track of
+  # shots taken that were misses.  Now you have to do that.
 #   def test_41_game_status_shows_hits_and_misses
 #     human1 = HumanPlayer.new("Amy")
 #     human2 = HumanPlayer.new("Beth")
