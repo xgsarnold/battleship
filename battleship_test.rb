@@ -1,3 +1,4 @@
+require 'byebug'
 require 'minitest/autorun'
 require 'minitest/pride'
 
@@ -175,6 +176,8 @@ J |   |   |   |   |   |   |   |   |   |   |
   -----------------------------------------
 }
   end
+
+byebug
 
   def test_18_place_ship
     grid = Grid.new
