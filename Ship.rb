@@ -1,55 +1,56 @@
-require './ComputerPlayer.rb'
+require './ComputerPlayer'
+require './Positions'
 
 class Ship
   def initialize(length)
     @length = length
     @positions = []
-    @hit_positions = []
   end
 
   def length
     @length
   end
 
-  def positions
-    @positions
-  end
-
   def place(x, y, across)
-    if @positions.empty?
-      if across
-        (x...x+@length).each do |i|
-        @positions << [i, y]
-        end
-      else
-        (y...y+@length).each do |i|
-        @positions << [x, i]
-        end
+    return false if @positions != []
+      length.times do |i|
+        @positions << (across ? Positions.new(x+i, y) : Positions.new(x, y+i))
       end
-    else
-    end
   end
 
   def covers?(x, y)
-    @positions.include?([x, y])
+    @positions.each do |i|
+      return i if i.x == x && i.y == y
+    end
+    false
   end
 
+  # def overlaps_with?(other_ship)
+  #   found = false
+  #   @positions.each do |i|
+  #     found = true if other_ship.covers?(i.x, i.y)
+  #   end
+  #   found
+  # end
+
   def overlaps_with?(other_ship)
-    @positions.each do |place|
-      return true if other_ship.covers?(place[0], place[1])
+    @positions.each do |i|
+      return true if other_ship.covers?(i.x, i.y)
     end
     false
   end
 
   def fire_at(x, y)
-    if !@hit_positions.include?([x, y]) && covers?(x, y)
-      @hit_positions << [x, y]
-    else
-      false
-    end
+    found = covers?(x, y)
+    found && found.hit!
   end
 
   def sunk?
-    @hit_positions.length == @length
+    return false if @positions.empty?
+    sunk = true
+    @positions.each do |i|
+      sunk = false unless i.hit?
+    end
+    sunk
   end
 end

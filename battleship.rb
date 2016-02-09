@@ -1,5 +1,9 @@
-require "./Grid.rb"
-
+require './Player'
+require './HumanPlayer'
+require './ComputerPlayer'
+require './Ship'
+require './Positions'
+require './Grid'
 
 
 

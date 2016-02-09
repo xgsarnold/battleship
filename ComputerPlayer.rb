@@ -1,4 +1,4 @@
-require './HumanPlayer.rb'
+require './Player'
 
 class ComputerPlayer < Player
   def name
