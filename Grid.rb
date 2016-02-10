@@ -2,23 +2,10 @@ require './Ship.rb'
 require 'byebug'
 
 class Grid
-  attr_reader :ships
+  attr_reader :piece_of_ship
   def initialize
-    @ships = []
+    @piece_of_ship = []
   end
-
-  # def display
-  #   puts "    1   2   3   4   5   6   7   8   9   10"
-  #   display_line
-  #   ("A".."J").each_with_index do |l|
-  #     puts l + " |   |   |   |   |   |   |   |   |   |   |"
-  #   end
-  #   display_line
-  # end
-  #
-  # private def display_line
-  #    puts "  -----------------------------------------"
-  # end
 
   def display
     puts "    1   2   3   4   5   6   7   8   9   10"
@@ -43,7 +30,15 @@ class Grid
   end
 
   def has_ship_on?(x, y)
-    @ships.each do |s|
+    @piece_of_ship.each do |s|
+      return true if s.covers?(x, y)
+    end
+    false
+  end
+
+  def fire_at(x, y)
+    return false if @piece_of_ship == []
+    @piece_of_ship.each do |s|
       return true if s.covers?(x, y)
     end
     false
@@ -51,11 +46,11 @@ class Grid
 
   def place_ship(ship, x, y, across)
     ship.place(x, y, across)
-    @ships.each do |s|
+    @piece_of_ship.each do |s|
       return false if ship.overlaps_with?(s)
     end
     true
-    @ships << ship
+    @piece_of_ship << ship
   end
 
 

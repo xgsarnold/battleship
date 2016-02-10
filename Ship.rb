@@ -11,6 +11,10 @@ class Ship
     @length
   end
 
+  def positions
+    @positions
+  end
+
   def place(x, y, across)
     return false if @positions != []
       length.times do |i|
@@ -24,14 +28,6 @@ class Ship
     end
     false
   end
-
-  # def overlaps_with?(other_ship)
-  #   found = false
-  #   @positions.each do |i|
-  #     found = true if other_ship.covers?(i.x, i.y)
-  #   end
-  #   found
-  # end
 
   def overlaps_with?(other_ship)
     @positions.each do |i|
