@@ -11,16 +11,18 @@ class Grid
     puts "    1   2   3   4   5   6   7   8   9   10"
     display_line
     ("A".."J").each_with_index do |l, i|
-      bar = l + " |"
+      row = l + " |"
       y = i + 1
       (1..10).each do |x|
-        bar << if has_ship_on?(x, y)
+        row << if has_ship_on?(x, y)
           " O |"
+        # elsif fire_at(x, y)
+        #   " X |"
         else
           "   |"
         end
       end
-    puts bar
+    puts row
     end
     display_line
   end
@@ -30,19 +32,47 @@ class Grid
   end
 
   def has_ship_on?(x, y)
+    # @piece_of_ship.any? {|s| s.covers?(x, y)}
     @piece_of_ship.each do |s|
-      return true if s.covers?(x, y)
+      return s if s.covers?(x, y)
     end
     false
   end
 
   def fire_at(x, y)
-    return false if @piece_of_ship == []
-    @piece_of_ship.each do |s|
-      return true if s.covers?(x, y)
+    ship = has_ship_on?(x, y)
+    if ship
+      ship.fire_at(x, y)
+    else
+      false
     end
-    false
   end
+
+  # def fire_at(x, y)
+  #   @piece_of_ship.each do |s|
+  #     @found = s.covers?(x, y)
+  #   end
+  #   @found && @found.hit!
+  # end
+  #
+  # def fire_at(x, y)
+  #   @piece_of_ship.each do |s|
+  #     found += s.covers?(x, y)
+  #   end
+  #
+  #   found.each do |p|
+  #     p.hit!
+  #   end
+
+
+  # def fire_at(x, y)
+  #   @ships.each do |s|
+  #     position = s.fire_at(x, y)
+  #     @fired_at < [x, y] if s.covers?(x, y)
+  #     return position
+  #   end
+  #   false
+  # end
 
   def place_ship(ship, x, y, across)
     ship.place(x, y, across)
