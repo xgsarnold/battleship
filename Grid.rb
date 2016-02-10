@@ -14,10 +14,11 @@ class Grid
       row = l + " |"
       y = i + 1
       (1..10).each do |x|
-        row << if has_ship_on?(x, y)
+        ship = has_ship_on?(x, y)
+        row << if ship && ship.hit_on?(x, y)
+          " X |"
+        elsif has_ship_on?(x, y)
           " O |"
-        # elsif fire_at(x, y)
-        #   " X |"
         else
           "   |"
         end
@@ -33,8 +34,8 @@ class Grid
 
   def has_ship_on?(x, y)
     # @piece_of_ship.any? {|s| s.covers?(x, y)}
-    @piece_of_ship.each do |s|
-      return s if s.covers?(x, y)
+    @piece_of_ship.each do |ship|
+      return ship if ship.covers?(x, y)
     end
     false
   end
@@ -47,6 +48,11 @@ class Grid
       false
     end
   end
+
+  def sunk?
+    @piece_of_ship.any? {|ship| ship.sunk?}
+  end
+
 
   # def fire_at(x, y)
   #   @piece_of_ship.each do |s|

@@ -23,8 +23,8 @@ class Ship
   end
 
   def covers?(x, y)
-    @positions.each do |i|
-      return i if i.x == x && i.y == y
+    @positions.each do |p|
+      return p if p.x == x && p.y == y
     end
     false
   end
@@ -40,6 +40,11 @@ class Ship
   def fire_at(x, y)
     found = covers?(x, y)
     found && found.hit!
+  end
+
+  def hit_on?(x, y)
+    found = covers?(x, y)
+    found && found.hit?
   end
 
   def sunk?
