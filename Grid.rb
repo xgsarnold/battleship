@@ -2,9 +2,9 @@ require './Ship.rb'
 require 'byebug'
 
 class Grid
-  attr_reader :piece_of_ship
+  attr_reader :ships
   def initialize
-    @piece_of_ship = []
+    @ships = []
   end
 
   def display
@@ -15,13 +15,13 @@ class Grid
       y = i + 1
       (1..10).each do |x|
         ship = has_ship_on?(x, y)
-        row << if ship && ship.hit_on?(x, y)
-          " X |"
-        elsif has_ship_on?(x, y)
-          " O |"
-        else
-          "   |"
-        end
+        row <<  if ship && ship.hit_on?(x, y)
+                  " X |"
+                elsif has_ship_on?(x, y)
+                  " O |"
+                else
+                  "   |"
+                end
       end
     puts row
     end
@@ -32,9 +32,27 @@ class Grid
      puts "  -----------------------------------------"
   end
 
+  def x_of(coordinates)
+    coordinates[1..-1].to_i
+  end
+
+  def y_of(coordinates)
+    oordinates[0].ord - "A".ord + 1
+  end
+
+
+  def place_ship(ship, x, y, across)
+    ship.place(x, y, across)
+    @ships.each do |s|
+      return false if ship.overlaps_with?(s)
+    end
+    @ships << ship
+    ship
+  end
+
   def has_ship_on?(x, y)
-    # @piece_of_ship.any? {|s| s.covers?(x, y)}
-    @piece_of_ship.each do |ship|
+    # @ships.any? {|s| s.covers?(x, y)}
+    @ships.each do |ship|
       return ship if ship.covers?(x, y)
     end
     false
@@ -50,44 +68,6 @@ class Grid
   end
 
   def sunk?
-    @piece_of_ship.any? {|ship| ship.sunk?}
+    @ships.any? {|ship| ship.sunk?}
   end
-
-
-  # def fire_at(x, y)
-  #   @piece_of_ship.each do |s|
-  #     @found = s.covers?(x, y)
-  #   end
-  #   @found && @found.hit!
-  # end
-  #
-  # def fire_at(x, y)
-  #   @piece_of_ship.each do |s|
-  #     found += s.covers?(x, y)
-  #   end
-  #
-  #   found.each do |p|
-  #     p.hit!
-  #   end
-
-
-  # def fire_at(x, y)
-  #   @ships.each do |s|
-  #     position = s.fire_at(x, y)
-  #     @fired_at < [x, y] if s.covers?(x, y)
-  #     return position
-  #   end
-  #   false
-  # end
-
-  def place_ship(ship, x, y, across)
-    ship.place(x, y, across)
-    @piece_of_ship.each do |s|
-      return false if ship.overlaps_with?(s)
-    end
-    true
-    @piece_of_ship << ship
-  end
-
-
 end
