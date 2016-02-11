@@ -429,90 +429,90 @@ J |   |   |   |   |   |   |   |   |   |   |
       game.welcome
     end
   end
-#
-#   # Second, test that the place_ships method works.
-#   def test_38_game_can_place_ships
-#     human = HumanPlayer.new("Frank")
-#     computer = ComputerPlayer.new
-#     game = Game.new(human, computer)
-#     $mock_inputs.clear
-#     $mock_inputs += standard_placement
-#     assert_output("Frank, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Frank, where would you like to place a ship of length 3?\nAcross or Down?\n"+
-#                   "Frank, where would you like to place a ship of length 3?\nAcross or Down?\n"+
-#                   "Frank, where would you like to place a ship of length 4?\nAcross or Down?\n"+
-#                   "Frank, where would you like to place a ship of length 5?\nAcross or Down?\n"+
-#                   "HAL 9000 has placed its ships.\n") do
-#       game.place_ships
-#     end
-#
-#     assert_equal 5, human.ships.length
-#     assert human.grid.has_ship_on?(1, 2)
-#     assert human.grid.has_ship_on?(3, 3)
-#     assert human.grid.has_ship_on?(9, 5)
-#     refute human.grid.has_ship_on?(7, 7)
-#
-#     assert_equal 5, computer.ships.length
-#     assert_equal 4, computer.ships[3].length
-#   end
-#
-#   def standard_placement
-#     ["A1","Down","A3","Down","A5","Down","A7","Down","A9","Down"]
-#   end
-#
-#
-#   # Third, test that a human player can see the two grids.
-#   def test_39_display_game_status
-#     human1 = HumanPlayer.new("Amy")
-#     human2 = HumanPlayer.new("Beth")
-#     game = Game.new(human1, human2)
-#
-#     $mock_inputs.clear
-#     $mock_inputs += standard_placement # Set up Amy's ships
-#     $mock_inputs += standard_placement # Set up Beth's ships in the same places
-#
-#     # The /./ means that it doesn't matter what its puts'ed to the screen.
-#     assert_output(/./) do
-#       game.place_ships
-#     end
-#     assert_output(starting_game_status) do
-#       game.display_status
-#     end
-#   end
-#
-#   def starting_game_status
-#     %Q{SHOTS TAKEN:
-#     1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A |   |   |   |   |   |   |   |   |   |   |
-# B |   |   |   |   |   |   |   |   |   |   |
-# C |   |   |   |   |   |   |   |   |   |   |
-# D |   |   |   |   |   |   |   |   |   |   |
-# E |   |   |   |   |   |   |   |   |   |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-#
-# YOUR BOARD:
-#     1   2   3   4   5   6   7   8   9   10
-#   -----------------------------------------
-# A | O |   | O |   | O |   | O |   | O |   |
-# B | O |   | O |   | O |   | O |   | O |   |
-# C |   |   | O |   | O |   | O |   | O |   |
-# D |   |   |   |   |   |   | O |   | O |   |
-# E |   |   |   |   |   |   |   |   | O |   |
-# F |   |   |   |   |   |   |   |   |   |   |
-# G |   |   |   |   |   |   |   |   |   |   |
-# H |   |   |   |   |   |   |   |   |   |   |
-# I |   |   |   |   |   |   |   |   |   |   |
-# J |   |   |   |   |   |   |   |   |   |   |
-#   -----------------------------------------
-# }
-#   end
-#
+
+  # Second, test that the place_ships method works.
+  def test_38_game_can_place_ships
+    human = HumanPlayer.new("Frank")
+    computer = ComputerPlayer.new
+    game = Game.new(human, computer)
+    $mock_inputs.clear
+    $mock_inputs += standard_placement
+    assert_output("Frank, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Frank, where would you like to place a ship of length 3?\nAcross or Down?\n"+
+                  "Frank, where would you like to place a ship of length 3?\nAcross or Down?\n"+
+                  "Frank, where would you like to place a ship of length 4?\nAcross or Down?\n"+
+                  "Frank, where would you like to place a ship of length 5?\nAcross or Down?\n"+
+                  "HAL 9000 has placed its ships.\n") do
+      game.place_ships
+    end
+
+    assert_equal 5, human.ships.length
+    assert human.grid.has_ship_on?(1, 2)
+    assert human.grid.has_ship_on?(3, 3)
+    assert human.grid.has_ship_on?(9, 5)
+    refute human.grid.has_ship_on?(7, 7)
+
+    assert_equal 5, computer.ships.length
+    assert_equal 4, computer.ships[3].length
+  end
+
+  def standard_placement
+    ["A1","Down","A3","Down","A5","Down","A7","Down","A9","Down"]
+  end
+
+
+  # Third, test that a human player can see the two grids.
+  def test_39_display_game_status
+    human1 = HumanPlayer.new("Amy")
+    human2 = HumanPlayer.new("Beth")
+    game = Game.new(human1, human2)
+
+    $mock_inputs.clear
+    $mock_inputs += standard_placement # Set up Amy's ships
+    $mock_inputs += standard_placement # Set up Beth's ships in the same places
+
+    # The /./ means that it doesn't matter what its puts'ed to the screen.
+    assert_output(/./) do
+      game.place_ships
+    end
+    assert_output(starting_game_status) do
+      game.display_status
+    end
+  end
+
+  def starting_game_status
+    %Q{SHOTS TAKEN:
+    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A |   |   |   |   |   |   |   |   |   |   |
+B |   |   |   |   |   |   |   |   |   |   |
+C |   |   |   |   |   |   |   |   |   |   |
+D |   |   |   |   |   |   |   |   |   |   |
+E |   |   |   |   |   |   |   |   |   |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+
+YOUR BOARD:
+    1   2   3   4   5   6   7   8   9   10
+  -----------------------------------------
+A | O |   | O |   | O |   | O |   | O |   |
+B | O |   | O |   | O |   | O |   | O |   |
+C |   |   | O |   | O |   | O |   | O |   |
+D |   |   |   |   |   |   | O |   | O |   |
+E |   |   |   |   |   |   |   |   | O |   |
+F |   |   |   |   |   |   |   |   |   |   |
+G |   |   |   |   |   |   |   |   |   |   |
+H |   |   |   |   |   |   |   |   |   |   |
+I |   |   |   |   |   |   |   |   |   |   |
+J |   |   |   |   |   |   |   |   |   |   |
+  -----------------------------------------
+}
+  end
+
 #   # Fourth, test that turns can be taken.  This should call `call_shot` on the
 #   # player who is up next.
 #   def test_40_two_humans_can_exchange_fire

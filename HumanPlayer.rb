@@ -24,6 +24,17 @@ class HumanPlayer < Player
         puts "Unfortunately, that ship overlaps with one of your other ships.  Please try again."
       end
     end
+
+    def call_shot
+      puts "#{name}, please enter the coordinates for your next shot (e.g. 'B10'):"
+      return "G10"
+      # coordinates = get_user_input
+      # x = grid.x_of(coordinates)
+      # y = grid.y_of(coordinates)
+      # (y, x)
+      # "#{y}#{x}"
+    end
+
       # or we tried this, but understand now why you have that counter to make it reprompt the questions.
 
       # x.each do |l|

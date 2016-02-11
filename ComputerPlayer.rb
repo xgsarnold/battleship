@@ -24,8 +24,10 @@ class ComputerPlayer < Player
   end
 
   def call_shot
-    y = (65 + rand(10)).chr
-    x = 
+    "A1"
+    # y = (65 + rand(10)).chr
+    # ("A".."J").include?(computer_shot[0])
+    # x = 
   end
 
 end

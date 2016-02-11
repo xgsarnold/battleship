@@ -4,7 +4,7 @@ require './ComputerPlayer'
 require './Ship'
 require './Positions'
 require './Grid'
-
+require './game'
 
 
 # class ArgumentError < StandardError
