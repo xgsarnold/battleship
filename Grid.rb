@@ -37,7 +37,7 @@ class Grid
   end
 
   def y_of(coordinates)
-    oordinates[0].ord - "A".ord + 1
+    coordinates[0].ord - "A".ord + 1
   end
 
 

@@ -321,114 +321,114 @@ J |   |   |   |   |   |   |   |   |   |   |
     assert_equal Grid, ComputerPlayer.new.grid.class
   end
 
-#   # Finally, we ask the user for input.  When the human player places ships,
-#   # the only parameter is an array with the lengths of the ships that need to be
-#   # placed.  The user is asked two things for each ship.  First, what is the
-#   # starting coordinate of that ship, and second, which direction (down/across).
-#   #
-#   # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
-#   # `get_user_input` method from the assignment README.
-#   def test_30_human_player_is_asked_to_place_ships
-#     player = HumanPlayer.new("Jess")
-#     $mock_inputs.clear
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A4"
-#     $mock_inputs << "Down"
-#     assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
-#       player.place_ships([2, 5])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 5, player.ships[1].length
-#     assert player.grid.has_ship_on?(1, 1)
-#     assert player.grid.has_ship_on?(4, 1)
-#     assert player.grid.has_ship_on?(1, 2)
-#     refute player.grid.has_ship_on?(1, 3)
-#   end
-#
-#
-#   def test_31_human_player_cannot_overlap_ships
-#     player = HumanPlayer.new("Alice")
-#     $mock_inputs.clear
-#     $mock_inputs << "A2"
-#     $mock_inputs << "Down"
-#     $mock_inputs << "A1"
-#     $mock_inputs << "Across"
-#     $mock_inputs << "F1"
-#     $mock_inputs << "Across"
-#     assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
-#                   "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
-#                   "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
-#       player.place_ships([2, 3])
-#     end
-#     assert_equal 2, player.ships.length
-#     assert_equal 3, player.ships[1].length
-#     assert player.grid.has_ship_on?(2, 1)
-#     assert player.grid.has_ship_on?(2, 2)
-#     assert player.grid.has_ship_on?(1, 6)
-#     refute player.grid.has_ship_on?(1, 1)
-#   end
-#
-#
-#   # This is the first test that involves you coming up with a strategy. The
-#   # computer player will need to put the ships somewhere.  Again, it can be as
-#   # dumb as you want, but the ships can't overlap.
-#   def test_32_computer_player_automatically_places_ships
-#     player = ComputerPlayer.new
-#     assert_output("HAL 9000 has placed its ships.\n") do
-#       player.place_ships([2, 3, 3, 4, 5])
-#     end
-#     assert_equal 5, player.ships.length
-#     assert_equal 4, player.ships[3].length
-#   end
-#
-#   # This is the second bit of "intelligence" that you can make as dumb as you
-#   # want.  The computer has to be able to decide where to shoot.
-#   def test_33_computer_players_can_call_shots
-#     player = ComputerPlayer.new
-#
-#     computer_shot = player.call_shot
-#     assert ("A".."J").include?(computer_shot[0])
-#     assert (1..10).include?(computer_shot[1..-1].to_i)
-#   end
-#
-#   def test_34_human_players_can_call_shots
-#     player = HumanPlayer.new
-#
-#     $mock_inputs.clear
-#     $mock_inputs << "G10"
-#     assert_output("Dave, please enter the coordinates for your next shot (e.g. 'B10'):\n") do
-#       human_shot = player.call_shot
-#       assert human_shot[0] = "G"
-#       assert human_shot[1..-1] = "10"
-#     end
-#   end
-#
-#   def test_35_game_class_exists
-#     assert Game
-#   end
-#
-#   def test_36_games_require_players
-#     assert_raises(ArgumentError) do
-#       Game.new
-#     end
-#     human = HumanPlayer.new("Frank")
-#     computer = ComputerPlayer.new
-#     assert Game.new(human, computer)
-#   end
-#
-#   # Tests 35 through XX are testing parts of game play, not the entire game.
-#   # First, test that the welcome method works.
-#   def test_37_game_welcomes_player
-#     human = HumanPlayer.new("Frank")
-#     computer = ComputerPlayer.new
-#     game = Game.new(human, computer)
-#     assert_output("Welcome, Frank and HAL 9000!\nIt's time to play Battleship.\n") do
-#       game.welcome
-#     end
-#   end
+  # Finally, we ask the user for input.  When the human player places ships,
+  # the only parameter is an array with the lengths of the ships that need to be
+  # placed.  The user is asked two things for each ship.  First, what is the
+  # starting coordinate of that ship, and second, which direction (down/across).
+  #
+  # REMEMBER: don't call `gets.chomp` anywhere in your code.  Use the
+  # `get_user_input` method from the assignment README.
+  def test_30_human_player_is_asked_to_place_ships
+    player = HumanPlayer.new("Jess")
+    $mock_inputs.clear
+    $mock_inputs << "A1"
+    $mock_inputs << "Down"
+    $mock_inputs << "A4"
+    $mock_inputs << "Down"
+    assert_output("Jess, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Jess, where would you like to place a ship of length 5?\nAcross or Down?\n") do
+      player.place_ships([2, 5])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 5, player.ships[1].length
+    assert player.grid.has_ship_on?(1, 1)
+    assert player.grid.has_ship_on?(4, 1)
+    assert player.grid.has_ship_on?(1, 2)
+    refute player.grid.has_ship_on?(1, 3)
+  end
+
+
+  def test_31_human_player_cannot_overlap_ships
+    player = HumanPlayer.new("Alice")
+    $mock_inputs.clear
+    $mock_inputs << "A2"
+    $mock_inputs << "Down"
+    $mock_inputs << "A1"
+    $mock_inputs << "Across"
+    $mock_inputs << "F1"
+    $mock_inputs << "Across"
+    assert_output("Alice, where would you like to place a ship of length 2?\nAcross or Down?\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n"+
+                  "Unfortunately, that ship overlaps with one of your other ships.  Please try again.\n"+
+                  "Alice, where would you like to place a ship of length 3?\nAcross or Down?\n") do
+      player.place_ships([2, 3])
+    end
+    assert_equal 2, player.ships.length
+    assert_equal 3, player.ships[1].length
+    assert player.grid.has_ship_on?(2, 1)
+    assert player.grid.has_ship_on?(2, 2)
+    assert player.grid.has_ship_on?(1, 6)
+    refute player.grid.has_ship_on?(1, 1)
+  end
+
+
+  # This is the first test that involves you coming up with a strategy. The
+  # computer player will need to put the ships somewhere.  Again, it can be as
+  # dumb as you want, but the ships can't overlap.
+  def test_32_computer_player_automatically_places_ships
+    player = ComputerPlayer.new
+    assert_output("HAL 9000 has placed its ships.\n") do
+      player.place_ships([2, 3, 3, 4, 5])
+    end
+    assert_equal 5, player.ships.length
+    assert_equal 4, player.ships[3].length
+  end
+
+  # This is the second bit of "intelligence" that you can make as dumb as you
+  # want.  The computer has to be able to decide where to shoot.
+  def test_33_computer_players_can_call_shots
+    player = ComputerPlayer.new
+
+    computer_shot = player.call_shot
+    assert ("A".."J").include?(computer_shot[0])
+    assert (1..10).include?(computer_shot[1..-1].to_i)
+  end
+
+  def test_34_human_players_can_call_shots
+    player = HumanPlayer.new
+
+    $mock_inputs.clear
+    $mock_inputs << "G10"
+    assert_output("Dave, please enter the coordinates for your next shot (e.g. 'B10'):\n") do
+      human_shot = player.call_shot
+      assert human_shot[0] = "G"
+      assert human_shot[1..-1] = "10"
+    end
+  end
+
+  def test_35_game_class_exists
+    assert Game
+  end
+
+  def test_36_games_require_players
+    assert_raises(ArgumentError) do
+      Game.new
+    end
+    human = HumanPlayer.new("Frank")
+    computer = ComputerPlayer.new
+    assert Game.new(human, computer)
+  end
+
+  # Tests 35 through XX are testing parts of game play, not the entire game.
+  # First, test that the welcome method works.
+  def test_37_game_welcomes_player
+    human = HumanPlayer.new("Frank")
+    computer = ComputerPlayer.new
+    game = Game.new(human, computer)
+    assert_output("Welcome, Frank and HAL 9000!\nIt's time to play Battleship.\n") do
+      game.welcome
+    end
+  end
 #
 #   # Second, test that the place_ships method works.
 #   def test_38_game_can_place_ships
