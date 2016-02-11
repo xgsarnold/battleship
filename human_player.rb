@@ -1,4 +1,4 @@
-require './Player'
+require './player'
 
 class HumanPlayer < Player
   attr_accessor :name

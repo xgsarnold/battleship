@@ -1,5 +1,5 @@
-require './ComputerPlayer'
-require './Positions'
+require './computer_player'
+require './positions'
 
 class Ship
   def initialize(length)

@@ -1,4 +1,4 @@
-require './Ship.rb'
+require './ship.rb'
 require 'byebug'
 
 class Grid

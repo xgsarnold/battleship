@@ -1,9 +1,9 @@
-require './Player'
-require './HumanPlayer'
-require './ComputerPlayer'
-require './Ship'
-require './Positions'
-require './Grid'
+require './player'
+require './human_player'
+require './computer_player'
+require './ship'
+require './positions'
+require './grid'
 require './game'
 
 

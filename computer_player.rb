@@ -1,4 +1,4 @@
-require './Player'
+require './player'
 
 class ComputerPlayer < Player
   def initialize
@@ -27,7 +27,7 @@ class ComputerPlayer < Player
     "A1"
     # y = (65 + rand(10)).chr
     # ("A".."J").include?(computer_shot[0])
-    # x = 
+    # x =
   end
 
 end
